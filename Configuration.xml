@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SearchRunners>
+    <!-- These are commented out because they'll only work with a private API key -->
+    <!--
+    <SearchRunner xsi:type="WebClientSearchRunner" Name="bing" Address="https://api.datamarket.azure.com/Bing/Search/v1/Composite" QueryName="Query" Disabled="false">
+      <Headers>
+        <Item Name="Authorization" Value="Basic [YOUR BING API KEY GOES HERE]" />
+      </Headers>
+      <Parameters>
+        <Item Name="Sources" Value="'web'" />
+        <Item Name="$format" Value="JSON" />
+        <Item Name="$top" Value="1" />
+      </Parameters>
+      <Finder xsi:type="JSONResultFinder">
+        <Path>["d"].["results"].[0].["WebTotal"]</Path>
+      </Finder>
+      <QueryFormatter xsi:type="QueryStringFormatter" Format="'{0}'" />
+    </SearchRunner>
+    <SearchRunner xsi:type="WebClientSearchRunner" Name="google" Address="https://www.googleapis.com/customsearch/v1" QueryName="q" Disabled="false">
+      <Parameters>
+        <Item Name="key" Value="[YOUR GOOGLE API KEY GOES HERE]" />
+        <Item Name="cx" Value="[YOUR GOOGLE cx PARAMETER (WHATEVER THAT MEANS) GOES HERE]" />
+        <Item Name="alt" Value="json" />
+      </Parameters>
+      <Finder xsi:type="JSONResultFinder">
+        <Path>["searchInformation"].["totalResults"]</Path>
+      </Finder>
+    </SearchRunner>
+    -->
+    <SearchRunner xsi:type="WebClientSearchRunner" Name="GoogleSerchEngine" Address="https://api.stackexchange.com/2.2/questions" QueryName="tagged" Disabled="false">
+      <Parameters>
+        <Item Name="site" Value="GoogleSerchEngine" />
+        <Item Name="filter" Value="!bCzphOiWu)Q3g)" />
+      </Parameters>
+      <Finder xsi:type="JSONResultFinder">
+        <Path>["total"]</Path>
+      </Finder>
+    </SearchRunner>
+    <SearchRunner xsi:type="WebClientSearchRunner" Name="bingScrape" Address="https://www.bing.com/search" QueryName="q" Disabled="false">
+      <Finder xsi:type="RegexResultFinder" GroupIndex="1">
+        <Pattern>\&lt;span[^\&gt;]+class="sb_count"[^\&gt;]*\&gt;([\d\.\,]+)</Pattern>
+      </Finder>
+    </SearchRunner>
+    <SearchRunner xsi:type="WebClientSearchRunner" Name="googleScrape" Address="https://www.google.com/search" QueryName="q" Disabled="false">
+      <Parameters>
+        <Item Name="hl" Value="en" />
+      </Parameters>
+      <Finder xsi:type="RegexResultFinder" GroupIndex="1">
+        <Pattern>\&lt;div[^\&gt;]+id="resultStats"[^\&gt;]*\&gt;About ([\d\,\.]+) results</Pattern>
+      </Finder>
+    </SearchRunner>
+  </SearchRunners>
+</Configuration>
