@@ -34,6 +34,10 @@ namespace ServiceEngine
             return Task.FromResult(Results[query]);
         }
     }
+
+    public interface ISearchRunner
+    {
+    }
 }
 
     
