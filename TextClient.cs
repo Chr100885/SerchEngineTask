@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using ServiceEngine.Utilities;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Net.Http;
 
 
 namespace ServiceEngine.SearchRunners
